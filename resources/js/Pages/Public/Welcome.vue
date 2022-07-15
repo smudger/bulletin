@@ -24,7 +24,5 @@ defineProps({
                 </Link>
             </template>
         </div>
-
-        <Link href="/about">About</Link>
     </div>
 </template>

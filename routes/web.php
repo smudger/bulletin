@@ -21,11 +21,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/about', function () {
-    sleep(3);
-    return Inertia::render('Public/About');
-});
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
