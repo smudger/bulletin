@@ -1,16 +1,16 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import vue from '@vitejs/plugin-vue';
-import fs from 'fs';
-import {homedir} from 'os'
-import {resolve} from 'path'
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import vue from "@vitejs/plugin-vue";
+import fs from "fs";
+import { homedir } from "os";
+import { resolve } from "path";
 
-let host = 'bulletin.test'
+let host = "bulletin.test";
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: 'resources/js/app.js',
+            input: "resources/js/app.js",
             refresh: true,
         }),
         vue({
@@ -26,23 +26,26 @@ export default defineConfig({
 });
 
 function detectServerConfig(host) {
-    let keyPath = resolve(homedir(), `.config/valet/Certificates/${host}.key`)
-    let certificatePath = resolve(homedir(), `.config/valet/Certificates/${host}.crt`)
+    let keyPath = resolve(homedir(), `.config/valet/Certificates/${host}.key`);
+    let certificatePath = resolve(
+        homedir(),
+        `.config/valet/Certificates/${host}.crt`
+    );
 
     if (!fs.existsSync(keyPath)) {
-        return {}
+        return {};
     }
 
     if (!fs.existsSync(certificatePath)) {
-        return {}
+        return {};
     }
 
     return {
-        hmr: {host},
+        hmr: { host },
         host,
         https: {
             key: fs.readFileSync(keyPath),
             cert: fs.readFileSync(certificatePath),
         },
-    }
+    };
 }
